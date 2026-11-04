@@ -1,0 +1,80 @@
+{
+  "scope": "Replay of recorded planning artifacts, not live search or product verification",
+  "records": [
+    {
+      "arguments": [
+        "init",
+        "--mode",
+        "plan"
+      ],
+      "exit_code": 0
+    },
+    {
+      "arguments": [
+        "record",
+        "discover",
+        "--artifact",
+        ".usegit/artifacts/discover.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "arguments": [
+        "record",
+        "find-skills",
+        "--artifact",
+        ".usegit/artifacts/find-skills.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "arguments": [
+        "record",
+        "find-repos",
+        "--artifact",
+        ".usegit/artifacts/find-repos.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "arguments": [
+        "record",
+        "evaluate",
+        "--artifact",
+        ".usegit/artifacts/evaluate.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "arguments": [
+        "status"
+      ],
+      "exit_code": 0
+    },
+    {
+      "arguments": [
+        "audit"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "final_status": {
+    "schema_version": 1,
+    "mode": "plan",
+    "complete_for_mode": false,
+    "next": [
+      "find-repos"
+    ],
+    "stages": {
+      "discover": "complete",
+      "find-skills": "complete",
+      "find-repos": "blocked",
+      "evaluate": "blocked",
+      "run": "not-required",
+      "adapt": "not-required",
+      "deploy": "not-required",
+      "verify": "not-required"
+    },
+    "changes": []
+  }
+}

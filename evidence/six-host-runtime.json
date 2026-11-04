@@ -1,0 +1,38 @@
+{
+  "checked_at": "2026-11-04T14:57:46.601949+00:00",
+  "environment": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "scope": "Executable-presence check only in six-host update; no host session launched. Prior Codex startup failure is retained in host-runtime.json.",
+  "hosts": {
+    "codex": {
+      "executable_present": true,
+      "runtime_status": "not-run",
+      "reason": "No host session attempted in this update; prior startup blocked"
+    },
+    "claude-code": {
+      "executable_present": false,
+      "runtime_status": "not-run",
+      "reason": "Executable absent from PATH; no UI session tested"
+    },
+    "deepseek-harness": {
+      "executable_present": false,
+      "runtime_status": "not-run",
+      "reason": "Executable absent from PATH; no UI session tested"
+    },
+    "openclaw": {
+      "executable_present": false,
+      "runtime_status": "not-run",
+      "reason": "Executable absent from PATH; no UI session tested"
+    },
+    "workbuddy": {
+      "executable_present": false,
+      "runtime_status": "not-run",
+      "reason": "Executable absent from PATH; no UI session tested"
+    },
+    "hermes": {
+      "executable_present": false,
+      "runtime_status": "not-run",
+      "reason": "Executable absent from PATH; no UI session tested"
+    }
+  }
+}

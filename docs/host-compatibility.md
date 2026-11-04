@@ -1,6 +1,8 @@
-# 五宿主安装、调用、升级与恢复
+# 六宿主安装、调用、升级与恢复
 
-核实日期：2026-11-04。这里的兼容适配是**文件分发与安全安装**；自动测试通过不等于五个宿主已真实发现、执行或完成客户项目。项目不自动安装宿主 CLI，不登录账号、不生成凭据、不设置 `allowed-tools`、hooks、MCP 或全局权限。
+核实日期：2026-11-04。这里的兼容适配是**文件分发与安全安装**；自动测试通过不等于六个宿主已真实发现、执行或完成客户项目。项目不自动安装宿主 CLI，不登录账号、不生成凭据、不设置 `allowed-tools`、hooks、MCP 或全局权限。
+
+本指南的 Hermes 指 [NousResearch Hermes Agent](https://github.com/NousResearch/hermes-agent)，不是其他同名产品。`cc` 指 Claude Code，`opencalw` 按 OpenClaw 理解。适配不等于安装宿主软件。
 
 ## 一、安装入口与官方依据
 
@@ -8,10 +10,11 @@
 
 | `--host` | 本工具在 `--project` 下的目的地 | 官方规则与调用方式 |
 | --- | --- | --- |
-| `codex` | `.agents/skills/<name>` | 官方列出项目 `.agents/skills` 和用户 `~/.agents/skills`；由元数据发现，选中后读取正文与资源。在项目新会话中明确要求“使用 vibe-coding-usegit”。[官方定制文档](https://learn.chatgpt.com/docs/customization/overview) |
+| `codex` | `.agents/skills/<name>` | 官方列出项目 `.agents/skills` 和用户 `~/.agents/skills`；由元数据发现，选中后读取正文与资源。在项目新会话中明确要求“使用 vibe-coding-usegit”。[官方技能文档](https://learn.chatgpt.com/docs/build-skills) |
 | `claude-code` | `.claude/skills/<name>` | 本地 Claude Code 支持项目技能，输入 `/vibe-coding-usegit`。本地个人、项目、云会话及 Cowork 的来源不同，不能以本工具安装推断云端可用。[官方技能文档](https://code.claude.com/docs/en/skills) |
 | `deepseek-harness` | `.dsh/skills/<name>` | 官方优先扫描项目 `.dsh/skills`，也支持 `.agents/skills`。本工具只写前者，避免两处静默重复。请 Agent 用 `skill({name: "vibe-coding-usegit"})` 加载并检查实际资源来源。[官方子系统说明](https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/subsystems/skills.md) |
 | `openclaw` | `skills/<name>` | `--project` 必须指向实际 agent workspace。workspace 技能有较高优先级，发现、依赖就绪和对 agent 可见需分别验证。[官方技能文档](https://docs.openclaw.ai/tools/skills) |
+| `hermes` | `.hermes/skills/<name>` | 项目级技能；`--project` 选实际 Git 根。需用户审阅并运行 `hermes skills trust`，再检查加载与调用 `/vibe-coding-usegit`。[官方技能说明](https://hermes-agent.nousresearch.com/docs/user-guide/features/skills#project-local-skills) |
 | `workbuddy` | `dist/workbuddy/<name>.zip` | 每个 ZIP 只有一个技能顶层目录；不猜测本地安装路径。技能板块→添加技能→上传技能，选本地包导入。自制包不能用市场对话安装替代。[官方上传说明](https://www.workbuddy.cn/docs/workbuddy/From-Beginner-to-Expert-Guide/Function-Description/Skills-Market) |
 
 WorkBuddy 市场规范要求 `name`、`description`、`display_name`、`display_name_en`、`description_zh`、`description_en`、`version`、`author`。适配层补齐中英文展示信息，版本及真实作者必须明确传入，不虚构厂商署名。此要求来自市场分发规范，不声称所有本地加载器也强制这些字段。`examples_zh/en` 是可选项，本包不生成。[WorkBuddy 开放平台规范](https://open.workbuddy.cn/docs/skill)
@@ -28,6 +31,7 @@ python tools/install_skills.py --host codex --project "/tmp/usegit 客户项目"
 python tools/install_skills.py --host claude-code --project "/tmp/usegit Claude" --apply
 python tools/install_skills.py --host deepseek-harness --project "/tmp/usegit DSH" --apply
 python tools/install_skills.py --host openclaw --project "/tmp/usegit Claw workspace" --apply
+python tools/install_skills.py --host hermes --project "/path/to/existing-git-project" --apply
 ```
 
 第一条是 dry-run，输出 JSON 计划，不创建项目、目录或备份。其余包含 `--apply` 才实际写入。实际使用时替换为宿主会打开的隔离项目/workspace。若有同名目录，即使文件相同也报冲突，需要显式 `--overwrite`，不静默覆盖。重复执行不会追加嵌套目录。
@@ -51,11 +55,49 @@ Windows 的原生文件系统与宿主没有在 Linux 测试中得到验证。�
 WorkBuddy 生成包：
 
 ```bash
-python tools/install_skills.py --host workbuddy --project "/tmp/usegit packages" --version 0.2.0 --author "你的真实署名"
+python tools/install_skills.py --host workbuddy --project "/tmp/usegit packages" --version 0.3.0 --author "你的真实署名"
 # 检查计划后，为同一命令添加 --apply
 ```
 
 先导入八个协作技能，再导入主技能，全部启用后开新对话明确选择主技能。上述顺序是本项目建议，不是声称平台强制。ZIP 生成不等于 UI 导入，不等于市场投稿成功。本工具不上传、不自动接受协议、不公开发布。
+
+## 各宿主激活与排错
+
+上述命令只装本项目技能。先安装并配置宿主软件，再将技能装到它实际使用的项目；模型、网络与账号仍由宿主管理。不要把下载的整个仓库 ZIP 当单个技能导入。
+
+### Codex
+
+在目标项目安装后重开会话，用 `/skills` 检查九个技能，再输入 `$vibe-coding-usegit` 或明确要求使用主技能。本工具仅管理项目 `.agents/skills`；个人目录 `~/.agents/skills` 的同名副本可能影响发现，应检查实际加载来源，不要盲目复制两份。
+
+### Claude Code（CC）
+
+进入目标项目启动 Claude Code，输入 `/vibe-coding-usegit`。本工具不修改 `~/.claude/skills`、插件、权限或 hooks。企业/个人同名技能可能优先于项目技能，务必核实来源。若选择器里没有技能，先检查项目路径与 `SKILL.md`，再重开会话；不要借用 Claude 网页上传成功来推断 Claude Code 安装成功。
+
+### DeepSeek Harness
+
+项目根按最近 `.git` 祖先确定，无 Git 时回退当前工作目录。在实际项目根安装到 `.dsh/skills`，由 Agent 的 `skill` 工具加载 `vibe-coding-usegit`，并核对返回资源路径。同名 `.agents/skills` 副本可能被项目原生目录遮蔽。这里指 deepseek-ai/deepseek-harness，不是给任意使用 DeepSeek 模型的应用添加技能。
+
+### OpenClaw
+
+`--project` 必须是当前 agent 的真实 workspace，不一定是你当前 shell 目录。安装后可用 `openclaw skills list`、`openclaw skills info vibe-coding-usegit` 和 `openclaw skills check` 检查发现/就绪；然后在该 agent 新会话中明确要求使用主技能。官方原生单技能安装也可用 `openclaw skills install ./skills/vibe-coding-usegit --as vibe-coding-usegit`，其他八个须分别安装；本仓库根没有单个 `SKILL.md`，不能把根目录当九技能安装入口。本工具完整复制不建立 ClawHub 更新跟踪，升级继续使用本工具。CLI 中出现名字不等于该会话已经完成调用。不要改写 `~/.openclaw` 全局配置来掩盖 workspace 错误。
+
+### WorkBuddy
+
+使用前述 `--host workbuddy` 生成九个独立 ZIP，带版本与真实作者。逐个在技能管理的“添加技能→上传技能”导入并启用，重新打开会话选择主技能。该路线使用官方 UI 导入，不依赖未公开确认的隐藏目录，不自动上传市场。应用内升级、停用、删除以当前 UI 为准，安装器只能管理输出 ZIP。
+
+### Hermes Agent（NousResearch）
+
+选择实际 Git 项目根，不是任意空目录。当前官方还支持 `.agents/skills`，本工具只写原生 `.hermes/skills`，不重复分发到两处。文件复制不会自动获得信任，用户审阅技能后在项目目录执行：
+
+```sh
+hermes skills trust
+hermes skills list
+# 在 Hermes 新会话中输入：/vibe-coding-usegit
+```
+
+安装器不运行信任命令，不创建 `.git`，不编辑 `config.yaml`、profile 或 `.env`。若本地 Hermes 版本不支持项目发现，升级宿主或按该版本文档手动配置；不要声称本工具自动生效。profile 的 `~/.hermes/skills`（或所选 `HERMES_HOME` 下的 skills）是另一种全局范围，本工具不写那里。项目技能可能被安全扫描隔离，必须查看宿主解释并修正内容，不能关闭扫描来绕过。
+
+对全部宿主：仅开启需要的工具；缺少 Python/网络/账号时记录阻塞。安装成功不会获得部署、付费或公开发布权限。
 
 ## 三、升级、卸载、备份恢复
 
@@ -113,6 +155,6 @@ python tools/install_skills.py --host codex --project "/tmp/usegit 客户项目"
 python -m unittest discover -s tests -p test_installer.py -v
 ```
 
-这组测试采用九个临时 fixture，并真实启动独立安装的 fixture Python 脚本；它测试复制与资源相对定位，不替代项目主 CLI 全套验证。五宿主文件布局和 WorkBuddy 字段/ZIP 路径是静态测试。需另用真实技能源生成分发，执行安装后的真实 `usegit.py`，并单独记录各宿主的交互式加载证据。
+这组测试采用九个临时 fixture，并真实启动独立安装的 fixture Python 脚本；它测试复制与资源相对定位，不替代项目主 CLI 全套验证。六宿主文件布局和 WorkBuddy 字段/ZIP 路径是静态测试。需另用真实技能源生成分发，执行安装后的真实 `usegit.py`，并单独记录各宿主的交互式加载证据。
 
 每条实际宿主检查记录：host、host_version、OS、skill_version、commit、case_id、command_or_prompt、expected、actual、status、evidence_path、timestamp。status 使用 `pass/fail/blocked/not-run`，证据类别使用 `observed/simulated/not-run`。只有运行过的那一层才能标 pass。当前本指南不宣称任何宿主已端到端通过，实际结果以本轮测试报告为准。
