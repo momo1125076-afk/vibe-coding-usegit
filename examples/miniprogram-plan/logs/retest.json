@@ -1,0 +1,50 @@
+[
+  {
+    "label": "packaged-help",
+    "tool": "skills/vibe-coding-usegit/scripts/usegit.py",
+    "tool_sha256": "b02303932285e84e603cf81f3c95db925c7ea00efe2536c1d224f1c4be3c5474",
+    "arguments": [
+      "init",
+      "--help"
+    ],
+    "exit_code": 0,
+    "log": "logs/packaged-help.log"
+  },
+  {
+    "label": "packaged-template",
+    "tool": "skills/vibe-coding-usegit/scripts/usegit.py",
+    "tool_sha256": "b02303932285e84e603cf81f3c95db925c7ea00efe2536c1d224f1c4be3c5474",
+    "arguments": [
+      "template",
+      "verify",
+      "--out",
+      ".usegit/artifacts/template-smoke.json"
+    ],
+    "exit_code": 2,
+    "log": "logs/packaged-template.log"
+  },
+  {
+    "label": "source-help",
+    "tool": "tools/usegit.py",
+    "tool_sha256": "c7f27c2a06d02758143b972d7919c8cd054c6003478eef1345b780e884a271ef",
+    "arguments": [
+      "init",
+      "--help"
+    ],
+    "exit_code": 0,
+    "log": "logs/source-help.log"
+  },
+  {
+    "label": "source-discover",
+    "tool": "tools/usegit.py",
+    "tool_sha256": "c7f27c2a06d02758143b972d7919c8cd054c6003478eef1345b780e884a271ef",
+    "arguments": [
+      "record",
+      "discover",
+      "--artifact",
+      ".usegit/artifacts/discover.json"
+    ],
+    "exit_code": 0,
+    "log": "logs/source-discover.log"
+  }
+]

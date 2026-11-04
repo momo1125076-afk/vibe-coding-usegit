@@ -1,0 +1,19 @@
+{
+  "recorded": "find-repos",
+  "schema_version": 1,
+  "mode": "plan",
+  "complete_for_mode": false,
+  "next": [
+    "find-repos"
+  ],
+  "stages": {
+    "discover": "complete",
+    "find-skills": "complete",
+    "find-repos": "blocked",
+    "evaluate": "stale",
+    "run": "not-required",
+    "adapt": "not-required",
+    "deploy": "not-required",
+    "verify": "not-required"
+  }
+}

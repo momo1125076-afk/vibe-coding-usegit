@@ -1,0 +1,7 @@
+usage: usegit.py init [-h] [--mode {plan,local,preview,release}]
+                      [--project PROJECT]
+
+options:
+  -h, --help            show this help message and exit
+  --mode {plan,local,preview,release}
+  --project PROJECT     Customer project root

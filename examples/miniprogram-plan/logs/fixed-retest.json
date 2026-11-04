@@ -1,0 +1,121 @@
+{
+  "distribution_identical": true,
+  "sha256": "c7f27c2a06d02758143b972d7919c8cd054c6003478eef1345b780e884a271ef",
+  "results": [
+    {
+      "arguments": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "log": "logs/fixed-00.log"
+    },
+    {
+      "arguments": [
+        "init",
+        "--project",
+        "<test-project>/fresh-init",
+        "--name",
+        "venue-booking",
+        "--idea",
+        "微信场地预约小程序和网页管理后台，首版不支付，只完成 plan",
+        "--platform",
+        "wechat-miniprogram",
+        "--platform",
+        "web",
+        "--platform",
+        "backend",
+        "--mode",
+        "plan"
+      ],
+      "exit_code": 0,
+      "log": "logs/fixed-01.log"
+    },
+    {
+      "arguments": [
+        "template",
+        "discover",
+        "--project",
+        "<test-project>/fresh-init",
+        "--out",
+        ".usegit/artifacts/discover.json"
+      ],
+      "exit_code": 0,
+      "log": "logs/fixed-02.log"
+    },
+    {
+      "arguments": [
+        "record",
+        "discover",
+        "--project",
+        "<test-project>",
+        "--artifact",
+        ".usegit/artifacts/discover.json"
+      ],
+      "exit_code": 0,
+      "log": "logs/fixed-03.log"
+    },
+    {
+      "arguments": [
+        "record",
+        "find-skills",
+        "--project",
+        "<test-project>",
+        "--artifact",
+        ".usegit/artifacts/find-skills.json"
+      ],
+      "exit_code": 0,
+      "log": "logs/fixed-04.log"
+    },
+    {
+      "arguments": [
+        "record",
+        "find-repos",
+        "--project",
+        "<test-project>",
+        "--artifact",
+        ".usegit/artifacts/find-repos.json"
+      ],
+      "exit_code": 0,
+      "log": "logs/fixed-05.log"
+    },
+    {
+      "arguments": [
+        "record",
+        "evaluate",
+        "--project",
+        "<test-project>",
+        "--artifact",
+        ".usegit/artifacts/evaluate.json"
+      ],
+      "exit_code": 0,
+      "log": "logs/fixed-06.log"
+    },
+    {
+      "arguments": [
+        "status",
+        "--project",
+        "<test-project>"
+      ],
+      "exit_code": 0,
+      "log": "logs/fixed-07.log"
+    },
+    {
+      "arguments": [
+        "next",
+        "--project",
+        "<test-project>"
+      ],
+      "exit_code": 0,
+      "log": "logs/fixed-08.log"
+    },
+    {
+      "arguments": [
+        "audit",
+        "--project",
+        "<test-project>"
+      ],
+      "exit_code": 0,
+      "log": "logs/fixed-09.log"
+    }
+  ]
+}

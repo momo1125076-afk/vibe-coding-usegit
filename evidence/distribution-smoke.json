@@ -1,0 +1,488 @@
+{
+  "observed_at": "2026-11-04T14:24:35.353622+00:00",
+  "verification": "observed",
+  "scope": "Thirty file-installation/Python smoke checks, NOT host runtime certification.",
+  "checks": 30,
+  "passed": 30,
+  "records": [
+    {
+      "host": "codex",
+      "case": "install",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "<PROJECT_ROOT>/tools/install_skills.py",
+        "--host",
+        "codex",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/codex",
+        "--source",
+        "<PROJECT_ROOT>/skills",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"host\": \"codex\",\n  \"operation\": \"install\",\n  \"dry_run\": false,\n  \"targets\": [\n    {\n      \"name\": \"vibe-coding-usegit\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/vibe-coding-usegit\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-discover\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/usegit-discover\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-find-skills\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/usegit-find-skills\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-find-repos\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/usegit-find-repos\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-evaluate\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/usegit-evaluate\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-run\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/usegit-run\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-adapt\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/usegit-adapt\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-deploy\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/usegit-deploy\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-verify\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/usegit-verify\",\n      \"exists\": false\n    }\n  ],\n  \"backup_id\": \"0738534c423e464ea2b37817b3518f90\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "codex",
+      "case": "help",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/vibe-coding-usegit/scripts/usegit.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: usegit.py [-h] [--project PROJECT]\n                 {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}\n                 ...\n\nEvidence-backed UseGit workflow controller. Python 3.10+, standard library\nonly. Only this controller writes .usegit/state.json. Reports and evidence are\nsupplied by the agent; validation establishes consistency, not the truth of\nhuman claims.\n\npositional arguments:\n  {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}\n    init                Initialize isolated workflow state\n    authorize           Register specific permission already received; never\n                        grants permission itself\n\noptions:\n  -h, --help            show this help message and exit\n  --project PROJECT     Customer project root (default: current directory)\n",
+      "stderr": ""
+    },
+    {
+      "host": "codex",
+      "case": "init",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/vibe-coding-usegit/scripts/usegit.py",
+        "init",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/codex-customer",
+        "--name",
+        "预约",
+        "--idea",
+        "场地预约",
+        "--platform",
+        "wechat-miniprogram",
+        "--mode",
+        "plan"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"mode\": \"plan\",\n  \"complete_for_mode\": false,\n  \"next\": [\n    \"discover\"\n  ],\n  \"stages\": {\n    \"discover\": \"pending\",\n    \"find-skills\": \"pending\",\n    \"find-repos\": \"pending\",\n    \"evaluate\": \"pending\",\n    \"run\": \"not-required\",\n    \"adapt\": \"not-required\",\n    \"deploy\": \"not-required\",\n    \"verify\": \"not-required\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "codex",
+      "case": "doctor",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/vibe-coding-usegit/scripts/usegit.py",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"python\": {\n    \"status\": \"ready\",\n    \"version\": \"3.12.14\"\n  },\n  \"tools\": {\n    \"git\": {\n      \"status\": \"untested\",\n      \"path\": \"/usr/local/bin/git\"\n    },\n    \"gh\": {\n      \"status\": \"untested\",\n      \"path\": \"/usr/bin/gh\"\n    },\n    \"node\": {\n      \"status\": \"untested\",\n      \"path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\"\n    },\n    \"npm\": {\n      \"status\": \"untested\",\n      \"path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/npm\"\n    },\n    \"docker\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    },\n    \"flutter\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    },\n    \"xcodebuild\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    }\n  },\n  \"credential_variables\": {\n    \"GH_TOKEN\": false,\n    \"GITHUB_TOKEN\": false,\n    \"GITEE_TOKEN\": false\n  },\n  \"authentication\": \"untested\",\n  \"note\": \"Executable presence is not login or platform readiness.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "codex",
+      "case": "status",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/vibe-coding-usegit/scripts/usegit.py",
+        "status",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/codex-customer"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"mode\": \"plan\",\n  \"complete_for_mode\": false,\n  \"next\": [\n    \"discover\"\n  ],\n  \"stages\": {\n    \"discover\": \"pending\",\n    \"find-skills\": \"pending\",\n    \"find-repos\": \"pending\",\n    \"evaluate\": \"pending\",\n    \"run\": \"not-required\",\n    \"adapt\": \"not-required\",\n    \"deploy\": \"not-required\",\n    \"verify\": \"not-required\"\n  },\n  \"changes\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "codex",
+      "case": "template",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/codex/.agents/skills/vibe-coding-usegit/scripts/usegit.py",
+        "template",
+        "discover",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/codex-customer",
+        "--out",
+        ".usegit/artifacts/discover.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"stage\": \"discover\",\n  \"status\": \"blocked\",\n  \"summary\": \"Describe the result; this template is not completion evidence.\",\n  \"outputs\": [],\n  \"evidence\": [],\n  \"checks\": [],\n  \"blockers\": [\n    {\n      \"reason\": \"Not executed\",\n      \"next_action\": \"Collect real evidence and complete this report\"\n    }\n  ],\n  \"executed_actions\": [],\n  \"requirements\": [\n    {\n      \"id\": \"REQ-001\",\n      \"priority\": \"must\",\n      \"text\": \"Replace with customer need\",\n      \"acceptance\": \"Replace with observable acceptance condition\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "claude-code",
+      "case": "install",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "<PROJECT_ROOT>/tools/install_skills.py",
+        "--host",
+        "claude-code",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/claude-code",
+        "--source",
+        "<PROJECT_ROOT>/skills",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"host\": \"claude-code\",\n  \"operation\": \"install\",\n  \"dry_run\": false,\n  \"targets\": [\n    {\n      \"name\": \"vibe-coding-usegit\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/vibe-coding-usegit\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-discover\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/usegit-discover\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-find-skills\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/usegit-find-skills\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-find-repos\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/usegit-find-repos\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-evaluate\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/usegit-evaluate\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-run\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/usegit-run\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-adapt\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/usegit-adapt\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-deploy\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/usegit-deploy\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-verify\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/usegit-verify\",\n      \"exists\": false\n    }\n  ],\n  \"backup_id\": \"898524289ca542b1bff32eb40428cbb4\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "claude-code",
+      "case": "help",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/vibe-coding-usegit/scripts/usegit.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: usegit.py [-h] [--project PROJECT]\n                 {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}\n                 ...\n\nEvidence-backed UseGit workflow controller. Python 3.10+, standard library\nonly. Only this controller writes .usegit/state.json. Reports and evidence are\nsupplied by the agent; validation establishes consistency, not the truth of\nhuman claims.\n\npositional arguments:\n  {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}\n    init                Initialize isolated workflow state\n    authorize           Register specific permission already received; never\n                        grants permission itself\n\noptions:\n  -h, --help            show this help message and exit\n  --project PROJECT     Customer project root (default: current directory)\n",
+      "stderr": ""
+    },
+    {
+      "host": "claude-code",
+      "case": "init",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/vibe-coding-usegit/scripts/usegit.py",
+        "init",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/claude-code-customer",
+        "--name",
+        "预约",
+        "--idea",
+        "场地预约",
+        "--platform",
+        "wechat-miniprogram",
+        "--mode",
+        "plan"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"mode\": \"plan\",\n  \"complete_for_mode\": false,\n  \"next\": [\n    \"discover\"\n  ],\n  \"stages\": {\n    \"discover\": \"pending\",\n    \"find-skills\": \"pending\",\n    \"find-repos\": \"pending\",\n    \"evaluate\": \"pending\",\n    \"run\": \"not-required\",\n    \"adapt\": \"not-required\",\n    \"deploy\": \"not-required\",\n    \"verify\": \"not-required\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "claude-code",
+      "case": "doctor",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/vibe-coding-usegit/scripts/usegit.py",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"python\": {\n    \"status\": \"ready\",\n    \"version\": \"3.12.14\"\n  },\n  \"tools\": {\n    \"git\": {\n      \"status\": \"untested\",\n      \"path\": \"/usr/local/bin/git\"\n    },\n    \"gh\": {\n      \"status\": \"untested\",\n      \"path\": \"/usr/bin/gh\"\n    },\n    \"node\": {\n      \"status\": \"untested\",\n      \"path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\"\n    },\n    \"npm\": {\n      \"status\": \"untested\",\n      \"path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/npm\"\n    },\n    \"docker\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    },\n    \"flutter\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    },\n    \"xcodebuild\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    }\n  },\n  \"credential_variables\": {\n    \"GH_TOKEN\": false,\n    \"GITHUB_TOKEN\": false,\n    \"GITEE_TOKEN\": false\n  },\n  \"authentication\": \"untested\",\n  \"note\": \"Executable presence is not login or platform readiness.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "claude-code",
+      "case": "status",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/vibe-coding-usegit/scripts/usegit.py",
+        "status",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/claude-code-customer"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"mode\": \"plan\",\n  \"complete_for_mode\": false,\n  \"next\": [\n    \"discover\"\n  ],\n  \"stages\": {\n    \"discover\": \"pending\",\n    \"find-skills\": \"pending\",\n    \"find-repos\": \"pending\",\n    \"evaluate\": \"pending\",\n    \"run\": \"not-required\",\n    \"adapt\": \"not-required\",\n    \"deploy\": \"not-required\",\n    \"verify\": \"not-required\"\n  },\n  \"changes\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "claude-code",
+      "case": "template",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/claude-code/.claude/skills/vibe-coding-usegit/scripts/usegit.py",
+        "template",
+        "discover",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/claude-code-customer",
+        "--out",
+        ".usegit/artifacts/discover.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"stage\": \"discover\",\n  \"status\": \"blocked\",\n  \"summary\": \"Describe the result; this template is not completion evidence.\",\n  \"outputs\": [],\n  \"evidence\": [],\n  \"checks\": [],\n  \"blockers\": [\n    {\n      \"reason\": \"Not executed\",\n      \"next_action\": \"Collect real evidence and complete this report\"\n    }\n  ],\n  \"executed_actions\": [],\n  \"requirements\": [\n    {\n      \"id\": \"REQ-001\",\n      \"priority\": \"must\",\n      \"text\": \"Replace with customer need\",\n      \"acceptance\": \"Replace with observable acceptance condition\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "deepseek-harness",
+      "case": "install",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "<PROJECT_ROOT>/tools/install_skills.py",
+        "--host",
+        "deepseek-harness",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/deepseek-harness",
+        "--source",
+        "<PROJECT_ROOT>/skills",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"host\": \"deepseek-harness\",\n  \"operation\": \"install\",\n  \"dry_run\": false,\n  \"targets\": [\n    {\n      \"name\": \"vibe-coding-usegit\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/vibe-coding-usegit\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-discover\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/usegit-discover\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-find-skills\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/usegit-find-skills\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-find-repos\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/usegit-find-repos\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-evaluate\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/usegit-evaluate\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-run\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/usegit-run\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-adapt\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/usegit-adapt\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-deploy\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/usegit-deploy\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-verify\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/usegit-verify\",\n      \"exists\": false\n    }\n  ],\n  \"backup_id\": \"a71245a5996b428cbf051a5716c30dd1\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "deepseek-harness",
+      "case": "help",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/vibe-coding-usegit/scripts/usegit.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: usegit.py [-h] [--project PROJECT]\n                 {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}\n                 ...\n\nEvidence-backed UseGit workflow controller. Python 3.10+, standard library\nonly. Only this controller writes .usegit/state.json. Reports and evidence are\nsupplied by the agent; validation establishes consistency, not the truth of\nhuman claims.\n\npositional arguments:\n  {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}\n    init                Initialize isolated workflow state\n    authorize           Register specific permission already received; never\n                        grants permission itself\n\noptions:\n  -h, --help            show this help message and exit\n  --project PROJECT     Customer project root (default: current directory)\n",
+      "stderr": ""
+    },
+    {
+      "host": "deepseek-harness",
+      "case": "init",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/vibe-coding-usegit/scripts/usegit.py",
+        "init",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/deepseek-harness-customer",
+        "--name",
+        "预约",
+        "--idea",
+        "场地预约",
+        "--platform",
+        "wechat-miniprogram",
+        "--mode",
+        "plan"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"mode\": \"plan\",\n  \"complete_for_mode\": false,\n  \"next\": [\n    \"discover\"\n  ],\n  \"stages\": {\n    \"discover\": \"pending\",\n    \"find-skills\": \"pending\",\n    \"find-repos\": \"pending\",\n    \"evaluate\": \"pending\",\n    \"run\": \"not-required\",\n    \"adapt\": \"not-required\",\n    \"deploy\": \"not-required\",\n    \"verify\": \"not-required\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "deepseek-harness",
+      "case": "doctor",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/vibe-coding-usegit/scripts/usegit.py",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"python\": {\n    \"status\": \"ready\",\n    \"version\": \"3.12.14\"\n  },\n  \"tools\": {\n    \"git\": {\n      \"status\": \"untested\",\n      \"path\": \"/usr/local/bin/git\"\n    },\n    \"gh\": {\n      \"status\": \"untested\",\n      \"path\": \"/usr/bin/gh\"\n    },\n    \"node\": {\n      \"status\": \"untested\",\n      \"path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\"\n    },\n    \"npm\": {\n      \"status\": \"untested\",\n      \"path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/npm\"\n    },\n    \"docker\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    },\n    \"flutter\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    },\n    \"xcodebuild\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    }\n  },\n  \"credential_variables\": {\n    \"GH_TOKEN\": false,\n    \"GITHUB_TOKEN\": false,\n    \"GITEE_TOKEN\": false\n  },\n  \"authentication\": \"untested\",\n  \"note\": \"Executable presence is not login or platform readiness.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "deepseek-harness",
+      "case": "status",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/vibe-coding-usegit/scripts/usegit.py",
+        "status",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/deepseek-harness-customer"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"mode\": \"plan\",\n  \"complete_for_mode\": false,\n  \"next\": [\n    \"discover\"\n  ],\n  \"stages\": {\n    \"discover\": \"pending\",\n    \"find-skills\": \"pending\",\n    \"find-repos\": \"pending\",\n    \"evaluate\": \"pending\",\n    \"run\": \"not-required\",\n    \"adapt\": \"not-required\",\n    \"deploy\": \"not-required\",\n    \"verify\": \"not-required\"\n  },\n  \"changes\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "deepseek-harness",
+      "case": "template",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/deepseek-harness/.dsh/skills/vibe-coding-usegit/scripts/usegit.py",
+        "template",
+        "discover",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/deepseek-harness-customer",
+        "--out",
+        ".usegit/artifacts/discover.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"stage\": \"discover\",\n  \"status\": \"blocked\",\n  \"summary\": \"Describe the result; this template is not completion evidence.\",\n  \"outputs\": [],\n  \"evidence\": [],\n  \"checks\": [],\n  \"blockers\": [\n    {\n      \"reason\": \"Not executed\",\n      \"next_action\": \"Collect real evidence and complete this report\"\n    }\n  ],\n  \"executed_actions\": [],\n  \"requirements\": [\n    {\n      \"id\": \"REQ-001\",\n      \"priority\": \"must\",\n      \"text\": \"Replace with customer need\",\n      \"acceptance\": \"Replace with observable acceptance condition\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "openclaw",
+      "case": "install",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "<PROJECT_ROOT>/tools/install_skills.py",
+        "--host",
+        "openclaw",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/openclaw",
+        "--source",
+        "<PROJECT_ROOT>/skills",
+        "--apply"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"host\": \"openclaw\",\n  \"operation\": \"install\",\n  \"dry_run\": false,\n  \"targets\": [\n    {\n      \"name\": \"vibe-coding-usegit\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/openclaw/skills/vibe-coding-usegit\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-discover\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/openclaw/skills/usegit-discover\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-find-skills\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/openclaw/skills/usegit-find-skills\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-find-repos\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/openclaw/skills/usegit-find-repos\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-evaluate\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/openclaw/skills/usegit-evaluate\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-run\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/openclaw/skills/usegit-run\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-adapt\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/openclaw/skills/usegit-adapt\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-deploy\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/openclaw/skills/usegit-deploy\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-verify\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/openclaw/skills/usegit-verify\",\n      \"exists\": false\n    }\n  ],\n  \"backup_id\": \"7c6f169742eb4ef7bd4765309da24eac\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "openclaw",
+      "case": "help",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/openclaw/skills/vibe-coding-usegit/scripts/usegit.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: usegit.py [-h] [--project PROJECT]\n                 {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}\n                 ...\n\nEvidence-backed UseGit workflow controller. Python 3.10+, standard library\nonly. Only this controller writes .usegit/state.json. Reports and evidence are\nsupplied by the agent; validation establishes consistency, not the truth of\nhuman claims.\n\npositional arguments:\n  {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}\n    init                Initialize isolated workflow state\n    authorize           Register specific permission already received; never\n                        grants permission itself\n\noptions:\n  -h, --help            show this help message and exit\n  --project PROJECT     Customer project root (default: current directory)\n",
+      "stderr": ""
+    },
+    {
+      "host": "openclaw",
+      "case": "init",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/openclaw/skills/vibe-coding-usegit/scripts/usegit.py",
+        "init",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/openclaw-customer",
+        "--name",
+        "预约",
+        "--idea",
+        "场地预约",
+        "--platform",
+        "wechat-miniprogram",
+        "--mode",
+        "plan"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"mode\": \"plan\",\n  \"complete_for_mode\": false,\n  \"next\": [\n    \"discover\"\n  ],\n  \"stages\": {\n    \"discover\": \"pending\",\n    \"find-skills\": \"pending\",\n    \"find-repos\": \"pending\",\n    \"evaluate\": \"pending\",\n    \"run\": \"not-required\",\n    \"adapt\": \"not-required\",\n    \"deploy\": \"not-required\",\n    \"verify\": \"not-required\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "openclaw",
+      "case": "doctor",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/openclaw/skills/vibe-coding-usegit/scripts/usegit.py",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"python\": {\n    \"status\": \"ready\",\n    \"version\": \"3.12.14\"\n  },\n  \"tools\": {\n    \"git\": {\n      \"status\": \"untested\",\n      \"path\": \"/usr/local/bin/git\"\n    },\n    \"gh\": {\n      \"status\": \"untested\",\n      \"path\": \"/usr/bin/gh\"\n    },\n    \"node\": {\n      \"status\": \"untested\",\n      \"path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\"\n    },\n    \"npm\": {\n      \"status\": \"untested\",\n      \"path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/npm\"\n    },\n    \"docker\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    },\n    \"flutter\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    },\n    \"xcodebuild\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    }\n  },\n  \"credential_variables\": {\n    \"GH_TOKEN\": false,\n    \"GITHUB_TOKEN\": false,\n    \"GITEE_TOKEN\": false\n  },\n  \"authentication\": \"untested\",\n  \"note\": \"Executable presence is not login or platform readiness.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "openclaw",
+      "case": "status",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/openclaw/skills/vibe-coding-usegit/scripts/usegit.py",
+        "status",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/openclaw-customer"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"mode\": \"plan\",\n  \"complete_for_mode\": false,\n  \"next\": [\n    \"discover\"\n  ],\n  \"stages\": {\n    \"discover\": \"pending\",\n    \"find-skills\": \"pending\",\n    \"find-repos\": \"pending\",\n    \"evaluate\": \"pending\",\n    \"run\": \"not-required\",\n    \"adapt\": \"not-required\",\n    \"deploy\": \"not-required\",\n    \"verify\": \"not-required\"\n  },\n  \"changes\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "openclaw",
+      "case": "template",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/openclaw/skills/vibe-coding-usegit/scripts/usegit.py",
+        "template",
+        "discover",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/openclaw-customer",
+        "--out",
+        ".usegit/artifacts/discover.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"stage\": \"discover\",\n  \"status\": \"blocked\",\n  \"summary\": \"Describe the result; this template is not completion evidence.\",\n  \"outputs\": [],\n  \"evidence\": [],\n  \"checks\": [],\n  \"blockers\": [\n    {\n      \"reason\": \"Not executed\",\n      \"next_action\": \"Collect real evidence and complete this report\"\n    }\n  ],\n  \"executed_actions\": [],\n  \"requirements\": [\n    {\n      \"id\": \"REQ-001\",\n      \"priority\": \"must\",\n      \"text\": \"Replace with customer need\",\n      \"acceptance\": \"Replace with observable acceptance condition\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "workbuddy",
+      "case": "install",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "<PROJECT_ROOT>/tools/install_skills.py",
+        "--host",
+        "workbuddy",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/workbuddy",
+        "--source",
+        "<PROJECT_ROOT>/skills",
+        "--apply",
+        "--version",
+        "0.2.0",
+        "--author",
+        "UseGit test fixture (not a release attribution)"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"ok\": true,\n  \"host\": \"workbuddy\",\n  \"operation\": \"install\",\n  \"dry_run\": false,\n  \"targets\": [\n    {\n      \"name\": \"vibe-coding-usegit\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/workbuddy/dist/workbuddy/vibe-coding-usegit.zip\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-discover\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/workbuddy/dist/workbuddy/usegit-discover.zip\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-find-skills\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/workbuddy/dist/workbuddy/usegit-find-skills.zip\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-find-repos\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/workbuddy/dist/workbuddy/usegit-find-repos.zip\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-evaluate\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/workbuddy/dist/workbuddy/usegit-evaluate.zip\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-run\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/workbuddy/dist/workbuddy/usegit-run.zip\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-adapt\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/workbuddy/dist/workbuddy/usegit-adapt.zip\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-deploy\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/workbuddy/dist/workbuddy/usegit-deploy.zip\",\n      \"exists\": false\n    },\n    {\n      \"name\": \"usegit-verify\",\n      \"path\": \"/tmp/usegit-smoke-ipy2974w/workbuddy/dist/workbuddy/usegit-verify.zip\",\n      \"exists\": false\n    }\n  ],\n  \"backup_id\": \"9e576ef038ac4ba4a2e4ca5412f4c716\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "workbuddy",
+      "case": "help",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/workbuddy-extracted/vibe-coding-usegit/scripts/usegit.py",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: usegit.py [-h] [--project PROJECT]\n                 {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}\n                 ...\n\nEvidence-backed UseGit workflow controller. Python 3.10+, standard library\nonly. Only this controller writes .usegit/state.json. Reports and evidence are\nsupplied by the agent; validation establishes consistency, not the truth of\nhuman claims.\n\npositional arguments:\n  {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}\n    init                Initialize isolated workflow state\n    authorize           Register specific permission already received; never\n                        grants permission itself\n\noptions:\n  -h, --help            show this help message and exit\n  --project PROJECT     Customer project root (default: current directory)\n",
+      "stderr": ""
+    },
+    {
+      "host": "workbuddy",
+      "case": "init",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/workbuddy-extracted/vibe-coding-usegit/scripts/usegit.py",
+        "init",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/workbuddy-customer",
+        "--name",
+        "预约",
+        "--idea",
+        "场地预约",
+        "--platform",
+        "wechat-miniprogram",
+        "--mode",
+        "plan"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"mode\": \"plan\",\n  \"complete_for_mode\": false,\n  \"next\": [\n    \"discover\"\n  ],\n  \"stages\": {\n    \"discover\": \"pending\",\n    \"find-skills\": \"pending\",\n    \"find-repos\": \"pending\",\n    \"evaluate\": \"pending\",\n    \"run\": \"not-required\",\n    \"adapt\": \"not-required\",\n    \"deploy\": \"not-required\",\n    \"verify\": \"not-required\"\n  }\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "workbuddy",
+      "case": "doctor",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/workbuddy-extracted/vibe-coding-usegit/scripts/usegit.py",
+        "doctor"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"python\": {\n    \"status\": \"ready\",\n    \"version\": \"3.12.14\"\n  },\n  \"tools\": {\n    \"git\": {\n      \"status\": \"untested\",\n      \"path\": \"/usr/local/bin/git\"\n    },\n    \"gh\": {\n      \"status\": \"untested\",\n      \"path\": \"/usr/bin/gh\"\n    },\n    \"node\": {\n      \"status\": \"untested\",\n      \"path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node\"\n    },\n    \"npm\": {\n      \"status\": \"untested\",\n      \"path\": \"/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/npm\"\n    },\n    \"docker\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    },\n    \"flutter\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    },\n    \"xcodebuild\": {\n      \"status\": \"unavailable\",\n      \"path\": null\n    }\n  },\n  \"credential_variables\": {\n    \"GH_TOKEN\": false,\n    \"GITHUB_TOKEN\": false,\n    \"GITEE_TOKEN\": false\n  },\n  \"authentication\": \"untested\",\n  \"note\": \"Executable presence is not login or platform readiness.\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "workbuddy",
+      "case": "status",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/workbuddy-extracted/vibe-coding-usegit/scripts/usegit.py",
+        "status",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/workbuddy-customer"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"mode\": \"plan\",\n  \"complete_for_mode\": false,\n  \"next\": [\n    \"discover\"\n  ],\n  \"stages\": {\n    \"discover\": \"pending\",\n    \"find-skills\": \"pending\",\n    \"find-repos\": \"pending\",\n    \"evaluate\": \"pending\",\n    \"run\": \"not-required\",\n    \"adapt\": \"not-required\",\n    \"deploy\": \"not-required\",\n    \"verify\": \"not-required\"\n  },\n  \"changes\": []\n}\n",
+      "stderr": ""
+    },
+    {
+      "host": "workbuddy",
+      "case": "template",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/tmp/usegit-smoke-ipy2974w/workbuddy-extracted/vibe-coding-usegit/scripts/usegit.py",
+        "template",
+        "discover",
+        "--project",
+        "/tmp/usegit-smoke-ipy2974w/workbuddy-customer",
+        "--out",
+        ".usegit/artifacts/discover.json"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"schema_version\": 1,\n  \"stage\": \"discover\",\n  \"status\": \"blocked\",\n  \"summary\": \"Describe the result; this template is not completion evidence.\",\n  \"outputs\": [],\n  \"evidence\": [],\n  \"checks\": [],\n  \"blockers\": [\n    {\n      \"reason\": \"Not executed\",\n      \"next_action\": \"Collect real evidence and complete this report\"\n    }\n  ],\n  \"executed_actions\": [],\n  \"requirements\": [\n    {\n      \"id\": \"REQ-001\",\n      \"priority\": \"must\",\n      \"text\": \"Replace with customer need\",\n      \"acceptance\": \"Replace with observable acceptance condition\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    }
+  ]
+}

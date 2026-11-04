@@ -1,0 +1,4 @@
+usage: usegit.py [-h] [--project PROJECT]
+                 {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}
+                 ...
+usegit.py: error: unrecognized arguments: --name venue-booking --idea 微信场地预约小程序和网页管理后台，首版不支付，只完成 plan --platform wechat-miniprogram --platform web --platform backend

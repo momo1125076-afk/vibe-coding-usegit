@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "mode": "plan",
+  "complete_for_mode": false,
+  "next": [
+    "discover"
+  ],
+  "stages": {
+    "discover": "pending",
+    "find-skills": "pending",
+    "find-repos": "pending",
+    "evaluate": "pending",
+    "run": "not-required",
+    "adapt": "not-required",
+    "deploy": "not-required",
+    "verify": "not-required"
+  }
+}

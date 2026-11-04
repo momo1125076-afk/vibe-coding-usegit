@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "stage": "discover",
+  "status": "complete",
+  "summary": "需求与假设已分离，足够支持受约束的选型准备，业务规则仍待确认",
+  "outputs": [
+    {
+      "path": ".usegit/artifacts/brief.md",
+      "description": "brief.md"
+    },
+    {
+      "path": ".usegit/artifacts/requirements.json",
+      "description": "requirements.json"
+    },
+    {
+      "path": ".usegit/artifacts/request.txt",
+      "description": "request.txt"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E001",
+      "kind": "file",
+      "claim": "已实际生成并读取的需求或准备产物，不代表业务已运行",
+      "verification": "observed",
+      "path": ".usegit/artifacts/brief.md"
+    }
+  ],
+  "checks": [],
+  "blockers": [],
+  "executed_actions": [],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "priority": "must",
+      "text": "微信场地预约小程序",
+      "acceptance": "用户进入微信小程序，能查看场地与可预约时段并提交预约；重复提交不会产生重复预约。"
+    },
+    {
+      "id": "REQ-002",
+      "priority": "must",
+      "text": "网页管理后台",
+      "acceptance": "管理员在浏览器管理场地与预约；普通预约用户不能访问管理操作。"
+    },
+    {
+      "id": "REQ-003",
+      "priority": "must",
+      "text": "首版不支付",
+      "acceptance": "预约主流程无需支付即可完成，且没有支付凭据采集或收费请求。"
+    },
+    {
+      "id": "REQ-004",
+      "priority": "must",
+      "text": "避免同一场地时段被重复占用",
+      "acceptance": "两个用户同时提交同一独占场地时段时，最多一个成功；另一方得到时段不可用提示。"
+    },
+    {
+      "id": "REQ-005",
+      "priority": "must",
+      "text": "预约记录与管理端保持一致",
+      "acceptance": "用户预约成功后，管理员可查询同一记录；请求失败时不显示成功。"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "python": {
+    "status": "ready",
+    "version": "3.12.14"
+  },
+  "tools": {
+    "git": {
+      "status": "untested",
+      "path": "<executable-present>"
+    },
+    "gh": {
+      "status": "untested",
+      "path": "<executable-present>"
+    },
+    "node": {
+      "status": "untested",
+      "path": "<executable-present>"
+    },
+    "npm": {
+      "status": "untested",
+      "path": "<executable-present>"
+    },
+    "docker": {
+      "status": "unavailable",
+      "path": null
+    },
+    "flutter": {
+      "status": "unavailable",
+      "path": null
+    },
+    "xcodebuild": {
+      "status": "unavailable",
+      "path": null
+    }
+  },
+  "credential_variables": {
+    "GH_TOKEN": false,
+    "GITHUB_TOKEN": false,
+    "GITEE_TOKEN": false
+  },
+  "authentication": "untested",
+  "note": "Executable presence is not login or platform readiness."
+}

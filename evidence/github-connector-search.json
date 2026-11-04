@@ -1,0 +1,13 @@
+{
+  "verification": "observed",
+  "environment": "dot connected GitHub plugin",
+  "observed_at": "2026-11-04T14:14:09Z",
+  "query": "appointment booking",
+  "requested_limit": 3,
+  "returned_repositories": [
+    "https://github.com/iZaL/my-appointment",
+    "https://github.com/girishsaraf/Online-Appointment-Booking-System",
+    "https://github.com/open-reception/appointment-booking-software"
+  ],
+  "scope": "Read-only connector search succeeded. This does not verify search_repos.py networking, candidate license suitability, native mini-program support or runtime behavior."
+}

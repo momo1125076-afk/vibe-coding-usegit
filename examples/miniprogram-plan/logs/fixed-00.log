@@ -1,0 +1,18 @@
+usage: usegit.py [-h] [--project PROJECT]
+                 {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}
+                 ...
+
+Evidence-backed UseGit workflow controller. Python 3.10+, standard library
+only. Only this controller writes .usegit/state.json. Reports and evidence are
+supplied by the agent; validation establishes consistency, not the truth of
+human claims.
+
+positional arguments:
+  {init,doctor,status,next,audit,template,record,authorize,invalidate,set-mode}
+    init                Initialize isolated workflow state
+    authorize           Register specific permission already received; never
+                        grants permission itself
+
+options:
+  -h, --help            show this help message and exit
+  --project PROJECT     Customer project root (default: current directory)

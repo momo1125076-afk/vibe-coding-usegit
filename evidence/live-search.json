@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "report_type": "repository-discovery",
+  "stage": "find-repos",
+  "retrieved_at": "2026-11-04T14:13:58.515917+00:00",
+  "queries": [
+    "appointment booking"
+  ],
+  "parameters": {
+    "provider": "both",
+    "limit": 3,
+    "min_stars": 0,
+    "max_pages": 1,
+    "page_size": 5,
+    "timeout": 5.0,
+    "include_archived": false
+  },
+  "coverage": [
+    {
+      "provider": "github",
+      "query": "appointment booking",
+      "status": "error",
+      "pages_requested": 1,
+      "raw_items": 0,
+      "accepted_items": 0,
+      "filtered_items": 0,
+      "invalid_items": 0,
+      "total_count": null,
+      "exhaustive": false,
+      "incomplete_results": false,
+      "stop_reason": "network_error",
+      "source_urls": [
+        "https://api.github.com/search/repositories?q=appointment+booking&page=1&per_page=5&sort=stars&order=desc"
+      ],
+      "authenticated": false
+    },
+    {
+      "provider": "gitee",
+      "query": "appointment booking",
+      "status": "error",
+      "pages_requested": 1,
+      "raw_items": 0,
+      "accepted_items": 0,
+      "filtered_items": 0,
+      "invalid_items": 0,
+      "total_count": null,
+      "exhaustive": false,
+      "incomplete_results": false,
+      "stop_reason": "network_error",
+      "source_urls": [
+        "https://gitee.com/api/v5/search/repositories?q=appointment+booking&page=1&per_page=5&sort=stars&order=desc"
+      ],
+      "authenticated": false
+    }
+  ],
+  "errors": [
+    {
+      "provider": "github",
+      "query": "appointment booking",
+      "page": 1,
+      "code": "network_error",
+      "message": "Provider request failed; no request secrets or response body recorded.",
+      "http_status": null,
+      "retry_after_seconds": null
+    },
+    {
+      "provider": "gitee",
+      "query": "appointment booking",
+      "page": 1,
+      "code": "network_error",
+      "message": "Provider request failed; no request secrets or response body recorded.",
+      "http_status": null,
+      "retry_after_seconds": null
+    }
+  ],
+  "candidates": [],
+  "notes": [
+    "Bounded API search only; not an exhaustive website search. Gitee has no verified total count."
+  ],
+  "coverage_complete": false
+}

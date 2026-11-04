@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "stage": "find-repos",
+  "status": "blocked",
+  "summary": "已准备双站检索方案，尚无实际查询或候选",
+  "outputs": [
+    {
+      "path": ".usegit/artifacts/repository-shortlist.md",
+      "description": "repository-shortlist.md"
+    },
+    {
+      "path": ".usegit/artifacts/repos.json",
+      "description": "repos.json"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E001",
+      "kind": "file",
+      "claim": "已实际生成并读取的需求或准备产物，不代表业务已运行",
+      "verification": "observed",
+      "path": ".usegit/artifacts/repository-shortlist.md"
+    }
+  ],
+  "checks": [],
+  "blockers": [
+    {
+      "reason": "本次仅完成需求和选型准备，未执行仓库检索，缺少真实候选和许可证证据",
+      "next_action": "确认关键业务规则后执行只读双站检索并核对源码与许可证"
+    }
+  ],
+  "executed_actions": []
+}

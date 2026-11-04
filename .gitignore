@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.env.*
+!.env.example
+.usegit/
+dist/
+.coverage
+.DS_Store
+.usegit-installer/

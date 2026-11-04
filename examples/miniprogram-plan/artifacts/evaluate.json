@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "stage": "evaluate",
+  "status": "blocked",
+  "summary": "只有评分与决策准备，没有真实候选，不能形成最终选型",
+  "outputs": [
+    {
+      "path": ".usegit/artifacts/selection.md",
+      "description": "selection.md"
+    },
+    {
+      "path": ".usegit/artifacts/assessments.json",
+      "description": "assessments.json"
+    },
+    {
+      "path": ".usegit/artifacts/comparison.json",
+      "description": "comparison.json"
+    }
+  ],
+  "evidence": [
+    {
+      "id": "E001",
+      "kind": "file",
+      "claim": "已实际生成并读取的需求或准备产物，不代表业务已运行",
+      "verification": "observed",
+      "path": ".usegit/artifacts/selection.md"
+    }
+  ],
+  "checks": [],
+  "blockers": [
+    {
+      "reason": "本次仅完成需求和选型准备，未执行仓库检索，缺少真实候选和许可证证据",
+      "next_action": "确认关键业务规则后执行只读双站检索并核对源码与许可证"
+    }
+  ],
+  "executed_actions": []
+}

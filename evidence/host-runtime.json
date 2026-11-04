@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-11-04T14:19:51.934991+00:00",
+  "environment": "Linux-6.18.57-x86_64-with-glibc2.41",
+  "python": "3.12.14",
+  "hosts": {
+    "codex": {
+      "executable": "/opt/codex/bin/codex",
+      "runtime_status": "blocked",
+      "reason": "App-server initialization failed on read-only filesystem",
+      "version": "codex-cli 0.166.0-alpha.1",
+      "command": "timeout 60 codex exec --ephemeral --sandbox read-only --skip-git-repo-check --color never -C ISOLATED_PROJECT <read-only skill inspection and doctor prompt>",
+      "exit_code": 1
+    },
+    "claude-code": {
+      "executable": null,
+      "runtime_status": "not-run",
+      "reason": "Executable not on PATH; UI host not tested"
+    },
+    "deepseek-harness": {
+      "executable": null,
+      "runtime_status": "not-run",
+      "reason": "Executable not on PATH; UI host not tested"
+    },
+    "openclaw": {
+      "executable": null,
+      "runtime_status": "not-run",
+      "reason": "Executable not on PATH; UI host not tested"
+    },
+    "workbuddy": {
+      "executable": null,
+      "runtime_status": "not-run",
+      "reason": "Executable not on PATH; UI host not tested"
+    }
+  },
+  "scope": "Actual executable presence and one bounded Codex host startup attempt; no five-host E2E pass."
+}

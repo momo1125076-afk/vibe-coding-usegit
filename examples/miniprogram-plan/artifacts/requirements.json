@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "scope_version": 1,
+  "project_name": "场地预约小程序与管理后台",
+  "goal": "整理微信预约和网页管理的首版需求与选型准备",
+  "platforms": [
+    "wechat-miniprogram",
+    "web",
+    "backend"
+  ],
+  "audiences": [
+    "预约用户（角色假设）",
+    "场地管理员（角色假设）"
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "description": "微信场地预约小程序",
+      "priority": "must",
+      "certainty": "confirmed",
+      "source": {
+        "kind": "user",
+        "reference": "当前测试请求",
+        "original_text": "我要做微信场地预约小程序和网页管理后台，首版不支付，只完成 plan。请整理真实需求与选型准备，不安装第三方软件，不部署，不提交远程。"
+      },
+      "platforms": [
+        "wechat-miniprogram"
+      ],
+      "depends_on": [],
+      "acceptance": [
+        {
+          "id": "REQ-001-A1",
+          "given": "具备相应用户身份和可用测试数据",
+          "when": "执行对应业务流程",
+          "then": "用户进入微信小程序，能查看场地与可预约时段并提交预约；重复提交不会产生重复预约。",
+          "verification_method": "实施后进行接口与目标端交互验证，本次未执行"
+        }
+      ]
+    },
+    {
+      "id": "REQ-002",
+      "description": "网页管理后台",
+      "priority": "must",
+      "certainty": "confirmed",
+      "source": {
+        "kind": "user",
+        "reference": "当前测试请求",
+        "original_text": "我要做微信场地预约小程序和网页管理后台，首版不支付，只完成 plan。请整理真实需求与选型准备，不安装第三方软件，不部署，不提交远程。"
+      },
+      "platforms": [
+        "web"
+      ],
+      "depends_on": [],
+      "acceptance": [
+        {
+          "id": "REQ-002-A1",
+          "given": "具备相应用户身份和可用测试数据",
+          "when": "执行对应业务流程",
+          "then": "管理员在浏览器管理场地与预约；普通预约用户不能访问管理操作。",
+          "verification_method": "实施后进行接口与目标端交互验证，本次未执行"
+        }
+      ]
+    },
+    {
+      "id": "REQ-003",
+      "description": "首版不支付",
+      "priority": "must",
+      "certainty": "confirmed",
+      "source": {
+        "kind": "user",
+        "reference": "当前测试请求",
+        "original_text": "我要做微信场地预约小程序和网页管理后台，首版不支付，只完成 plan。请整理真实需求与选型准备，不安装第三方软件，不部署，不提交远程。"
+      },
+      "platforms": [
+        "wechat-miniprogram"
+      ],
+      "depends_on": [],
+      "acceptance": [
+        {
+          "id": "REQ-003-A1",
+          "given": "具备相应用户身份和可用测试数据",
+          "when": "执行对应业务流程",
+          "then": "预约主流程无需支付即可完成，且没有支付凭据采集或收费请求。",
+          "verification_method": "实施后进行接口与目标端交互验证，本次未执行"
+        }
+      ]
+    },
+    {
+      "id": "REQ-004",
+      "description": "避免同一场地时段被重复占用",
+      "priority": "must",
+      "certainty": "assumed",
+      "source": {
+        "kind": "assumption",
+        "reference": "当前测试请求",
+        "original_text": "场地预约的保守候选规则，尚未获用户确认"
+      },
+      "platforms": [
+        "backend"
+      ],
+      "depends_on": [],
+      "acceptance": [
+        {
+          "id": "REQ-004-A1",
+          "given": "具备相应用户身份和可用测试数据",
+          "when": "执行对应业务流程",
+          "then": "两个用户同时提交同一独占场地时段时，最多一个成功；另一方得到时段不可用提示。",
+          "verification_method": "实施后进行接口与目标端交互验证，本次未执行"
+        }
+      ]
+    },
+    {
+      "id": "REQ-005",
+      "description": "预约记录与管理端保持一致",
+      "priority": "must",
+      "certainty": "assumed",
+      "source": {
+        "kind": "assumption",
+        "reference": "当前测试请求",
+        "original_text": "场地预约的保守候选规则，尚未获用户确认"
+      },
+      "platforms": [
+        "backend"
+      ],
+      "depends_on": [],
+      "acceptance": [
+        {
+          "id": "REQ-005-A1",
+          "given": "具备相应用户身份和可用测试数据",
+          "when": "执行对应业务流程",
+          "then": "用户预约成功后，管理员可查询同一记录；请求失败时不显示成功。",
+          "verification_method": "实施后进行接口与目标端交互验证，本次未执行"
+        }
+      ]
+    }
+  ],
+  "constraints": [
+    {
+      "id": "C001",
+      "description": "仅 plan；不得安装第三方软件、部署或提交远程",
+      "certainty": "confirmed",
+      "impact": "只进行本地文档与现有工具检查，不运行候选项目"
+    }
+  ],
+  "non_goals": [
+    "支付",
+    "实际开发运行",
+    "部署与商店提交",
+    "远程提交"
+  ],
+  "open_questions": [
+    "预约是立即生效还是管理员审批？取消/改期的截止规则是什么？",
+    "场地是独占时段还是按人数容量预约？单场馆还是多个场馆/组织？",
+    "用户登录方式、数据存放地域、已有服务器与维护人员有何要求？"
+  ],
+  "authorized_actions": [],
+  "change_requests": []
+}

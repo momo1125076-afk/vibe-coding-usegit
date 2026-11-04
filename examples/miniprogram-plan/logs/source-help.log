@@ -1,0 +1,10 @@
+usage: usegit.py init [-h] [--mode {plan,local,preview,release}] [--name NAME]
+                      [--idea IDEA] [--platform PLATFORM] [--project PROJECT]
+
+options:
+  -h, --help            show this help message and exit
+  --mode {plan,local,preview,release}
+  --name NAME           Customer project name
+  --idea IDEA           Customer idea and scope summary
+  --platform PLATFORM   Target platform ID; repeat for multiple platforms
+  --project PROJECT     Customer project root

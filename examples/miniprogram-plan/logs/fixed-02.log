@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "stage": "discover",
+  "status": "blocked",
+  "summary": "Describe the result; this template is not completion evidence.",
+  "outputs": [],
+  "evidence": [],
+  "checks": [],
+  "blockers": [
+    {
+      "reason": "Not executed",
+      "next_action": "Collect real evidence and complete this report"
+    }
+  ],
+  "executed_actions": [],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "priority": "must",
+      "text": "Replace with customer need",
+      "acceptance": "Replace with observable acceptance condition"
+    }
+  ]
+}
