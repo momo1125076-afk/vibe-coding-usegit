@@ -1,8 +1,20 @@
 # 验证报告
 
-日期：2026-11-04。对象：dot Linux 云工作区重建版，版本 0.2.0-rebuild。Python 3.12.14。源码提交以仓库实际提交为准；本报告不沿用旧工程的 76 项测试记录。
+日期：2026-11-04。对象：dot Linux 云工作区重建版，版本 0.3.0（六宿主安装更新）。Python 3.12.14。源码提交以仓库实际提交为准；本报告不沿用旧工程的 76 项测试记录。
 
-## 本轮真实结果
+## 六宿主安装更新（0.3.0）
+
+本轮基于已公开的 `dd66a8bcd81c798b62c45456c7947510cdd164fd` 内容继续，新增 Hermes 项目分发，复核全部六宿主的官方安装规范。主工具/技能协议未重写。Hermes 指 NousResearch Hermes Agent。
+
+- 全套 122 项单元测试通过：工作流58、安装器40、搜索11、评分13。[本轮日志](../evidence/six-host-unittest.log)。
+- 六宿主分发与独立 Python CLI 冒烟检查 36/36 通过。[本轮报告](../evidence/six-host-distribution-smoke.json)。
+- 分发/链接/脚本一致性检查通过，compileall 通过，示例重放仍为 7/7。[检查](../evidence/six-host-distribution-check.json)、[重放](../evidence/six-host-example-replay.json)。
+- Hermes 新测试覆盖 dry-run、冲突拒绝、覆盖备份、恢复/卸载、无关技能和配置保留、符号链接拒绝；不会执行信任命令或创建 Git 仓库。
+- 六宿主均未在本轮执行模型会话；只检查可执行程序存在性。[环境记录](../evidence/six-host-runtime.json)。Hermes 未安装；先前 Codex 初始化失败仍保留在下表。
+
+这些结果只证明布局、安装器和独立脚本层，不证明宿主已发现、信任或调用技能。Hermes 的临时目录 smoke 不是 Git 项目，不声称完成真实发现/信任。WorkBuddy ZIP 未导入 UI，其他宿主也没有端到端新结果。初版真实证据保留如下，不将旧的 30 项数据冒充本轮 36 项数据。
+
+## 初版重建结果（0.2.0，保留历史证据）
 
 | 检查 | 结果 | 范围与证据 |
 |---|---|---|
@@ -51,4 +63,4 @@ python3 tools/search_repos.py --provider both --query 'appointment booking' --li
 
 ## 待完成与发布状态
 
-真实五宿主加载、联网搜索、目标平台构建与业务测试需要在具备对应工具/账号/设备的环境补测。GitHub CI配置已经提供，但其远程运行结果只能在实际推送后确认，不能用本地测试代替。仓库创建、远端提交和CI的最终状态由交付消息附上准确链接与结果。
+真实六宿主加载、联网搜索、目标平台构建与业务测试需要在具备对应工具/账号/设备的环境补测。初版公开提交的 [GitHub Actions](https://github.com/momo1125076-afk/vibe-coding-usegit/actions/runs/41849508720) 已确认 Python 3.10/3.12 成功。0.3.0 的准确提交和 CI 结果以本次交付消息及 [Actions 页面](https://github.com/momo1125076-afk/vibe-coding-usegit/actions) 为准，不能用初版远程成功替代本轮确认。

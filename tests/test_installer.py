@@ -45,7 +45,7 @@ class InstallerTests(unittest.TestCase):
         self.assertEqual(len(result['targets']), 9)
         self.assertFalse(self.project.exists())
 
-    def test_five_hosts_nine_independent_packages(self):
+    def test_six_hosts_nine_independent_packages(self):
         for host in installer.HOSTS:
             with self.subTest(host=host):
                 extra = ['--version', '0.2.0', '--author', 'Fixture author'] if host == 'workbuddy' else []
@@ -67,14 +67,88 @@ class InstallerTests(unittest.TestCase):
                         self.assertEqual((p / 'references/guide.md').read_text(), '本地资源\n')
 
     def test_installed_resources_run_without_source(self):
-        for host in ('codex', 'claude-code', 'deepseek-harness', 'openclaw'):
+        for host in ('codex', 'claude-code', 'deepseek-harness', 'openclaw', 'hermes'):
             self.run_install(host, '--apply')
         moved = self.source.parent / 'hidden'
         self.source.rename(moved)
-        for host in ('codex', 'claude-code', 'deepseek-harness', 'openclaw'):
+        for host in ('codex', 'claude-code', 'deepseek-harness', 'openclaw', 'hermes'):
             run = subprocess.run([sys.executable, str(self.target(host=host) / 'scripts/probe.py')], cwd=self.root, capture_output=True, text=True)
             self.assertEqual(run.returncode, 0, run.stderr)
             self.assertIn('本地资源', run.stdout)
+
+    def test_hermes_dry_run_warns_without_creating_project_or_git(self):
+        result = self.run_install('hermes')
+        self.assertTrue(result['dry_run'])
+        self.assertEqual(len(result['targets']), 9)
+        self.assertIn('nearest .git ancestor', result['warnings'][0])
+        self.assertIn('hermes skills trust', result['warnings'][1])
+        self.assertTrue(all('/.hermes/skills/' in t['path'] for t in result['targets']))
+        self.assertFalse(self.project.exists())
+
+    def test_hermes_lifecycle_preserves_unrelated_skills_config_and_trust(self):
+        unrelated = self.project / '.hermes/skills/unrelated/SKILL.md'
+        unrelated.parent.mkdir(parents=True)
+        unrelated.write_text('User-owned skill', encoding='utf-8')
+        protected = [unrelated, self.project / '.hermes/config.yaml',
+                     self.project / '.hermes/trusted_projects.json',
+                     self.project / '.agents/skills/shared/SKILL.md']
+        for file in protected[1:]:
+            file.parent.mkdir(parents=True, exist_ok=True)
+            file.write_text('User-owned settings or shared skill', encoding='utf-8')
+        original_protected = {file: file.read_bytes() for file in protected}
+        # No external command (including git or hermes trust) may be invoked.
+        with mock.patch.object(subprocess, 'run', side_effect=AssertionError('External command forbidden')):
+            fresh = self.run_install('hermes', '--apply')
+            self.assertIn('warnings', fresh)
+            originals = {name: installer.fingerprint(self.target(name, 'hermes'))
+                         for name in installer.NAMES}
+            with self.assertRaisesRegex(installer.InstallError, 'already exists'):
+                self.run_install('hermes', '--apply')
+            self.assertEqual(originals, {name: installer.fingerprint(self.target(name, 'hermes'))
+                                         for name in installer.NAMES})
+            source_file = self.source / installer.NAMES[0] / 'SKILL.md'
+            source_file.write_bytes(source_file.read_bytes() + b'New version.\n')
+            updated = self.run_install('hermes', '--apply', '--overwrite')
+            self.assertNotEqual(installer.fingerprint(self.target(host='hermes')), originals[installer.NAMES[0]])
+            self.run_install('hermes', '--apply', '--restore', updated['backup_id'])
+            self.assertEqual(originals, {name: installer.fingerprint(self.target(name, 'hermes'))
+                                         for name in installer.NAMES})
+            plan = self.run_install('hermes', '--uninstall')
+            self.assertTrue(plan['dry_run'])
+            self.assertTrue(self.target(host='hermes').exists())
+            removed = self.run_install('hermes', '--apply', '--uninstall')
+            self.assertTrue(all(not self.target(name, 'hermes').exists() for name in installer.NAMES))
+            self.run_install('hermes', '--apply', '--restore', removed['backup_id'])
+            self.assertEqual(originals, {name: installer.fingerprint(self.target(name, 'hermes'))
+                                         for name in installer.NAMES})
+            self.run_install('hermes', '--apply', '--restore', fresh['backup_id'])
+        self.assertTrue(all(not self.target(name, 'hermes').exists() for name in installer.NAMES))
+        self.assertEqual(original_protected, {file: file.read_bytes() for file in protected})
+        self.assertFalse((self.project / '.git').exists())
+        self.assertEqual(set((self.project / '.hermes').iterdir()),
+                         {self.project / '.hermes/skills', *protected[1:3]})
+
+    def test_hermes_preserves_profile_home_trust_configuration(self):
+        home = self.root / 'fake home'
+        config = home / '.hermes/config.yaml'
+        config.parent.mkdir(parents=True)
+        original = b'skills:\n  trusted_project_dirs: []\n'
+        config.write_bytes(original)
+        env = {'HOME': str(home), 'HERMES_HOME': str(config.parent)}
+        with mock.patch.dict(installer.os.environ, env), mock.patch.object(Path, 'home', return_value=home):
+            result = self.run_install('hermes', '--apply')
+            self.run_install('hermes', '--apply', '--restore', result['backup_id'])
+        self.assertEqual(config.read_bytes(), original)
+        self.assertEqual(list(config.parent.iterdir()), [config])
+
+    def test_hermes_symlink_ancestor_rejected(self):
+        self.project.mkdir()
+        outside = self.root / 'outside'
+        outside.mkdir()
+        (self.project / '.hermes').symlink_to(outside, target_is_directory=True)
+        with self.assertRaisesRegex(installer.InstallError, 'Symlink'):
+            self.run_install('hermes', '--apply')
+        self.assertEqual(list(outside.iterdir()), [])
 
     def test_repeat_requires_overwrite(self):
         self.run_install('codex', '--apply')

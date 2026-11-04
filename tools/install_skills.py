@@ -28,7 +28,7 @@ NAMES = (
 HOSTS = {
     'codex': '.agents/skills', 'claude-code': '.claude/skills',
     'deepseek-harness': '.dsh/skills', 'openclaw': 'skills',
-    'workbuddy': 'dist/workbuddy',
+    'workbuddy': 'dist/workbuddy', 'hermes': '.hermes/skills',
 }
 FIELDS = {'name', 'description', 'display_name', 'display_name_en',
           'description_zh', 'description_en', 'version', 'author'}
@@ -357,6 +357,14 @@ def execute(args):
         targets.append({'name': name, 'path': str(target), 'exists': existing is not None})
     result = {'host': args.host, 'operation': 'restore' if args.restore else 'uninstall' if args.uninstall else 'install',
               'dry_run': not args.apply, 'targets': targets}
+    if args.host == 'hermes':
+        result['warnings'] = [
+            'Hermes discovers project skills at the nearest .git ancestor. '
+            'Set --project to that Git project root; this installer does not initialize Git.',
+            'Hermes requires explicit project trust. Review the installed skills, then '
+            'run hermes skills trust yourself from the project. This installer never '
+            'runs trust or changes host configuration.',
+        ]
     if not args.apply:
         return result
     if restoring:

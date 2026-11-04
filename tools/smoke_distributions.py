@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Thirty file-installation/Python smoke checks, NOT host runtime certification."""
+"""Thirty-six file-installation/Python smoke checks, NOT host runtime certification."""
 import argparse,json,subprocess,sys,tempfile,zipfile
 from pathlib import Path
 from datetime import datetime,timezone
 ROOT=Path(__file__).resolve().parents[1]
-HOSTS={'codex':'.agents/skills','claude-code':'.claude/skills','deepseek-harness':'.dsh/skills','openclaw':'skills','workbuddy':'dist/workbuddy'}
+HOSTS={'codex':'.agents/skills','claude-code':'.claude/skills','deepseek-harness':'.dsh/skills','openclaw':'skills','workbuddy':'dist/workbuddy','hermes':'.hermes/skills'}
 def main():
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--out',default='evidence/distribution-smoke.json');a=p.parse_args();records=[]
  with tempfile.TemporaryDirectory(prefix='usegit-smoke-') as tmp:
@@ -15,7 +15,7 @@ def main():
    if r.returncode:raise RuntimeError(f'{host}/{case}: {r.returncode}')
   for host,sub in HOSTS.items():
    project=base/host;cmd=[sys.executable,str(ROOT/'tools/install_skills.py'),'--host',host,'--project',str(project),'--source',str(ROOT/'skills'),'--apply']
-   if host=='workbuddy':cmd+=['--version','0.2.0','--author','UseGit test fixture (not a release attribution)']
+   if host=='workbuddy':cmd+=['--version',(ROOT/'VERSION').read_text().strip(),'--author','UseGit test fixture (not a release attribution)']
    run(host,'install',cmd)
    skill=project/sub/'vibe-coding-usegit'
    if host=='workbuddy':
